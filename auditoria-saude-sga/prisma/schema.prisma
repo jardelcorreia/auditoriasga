@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Establishment {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  code      String   @unique
+  type      String
+  audits    Audit[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("establishments")
+}
+
+model AuditTemplate {
+  id                 String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name               String
+  establishment_type String
+  template_data      Json
+  audits             Audit[]
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("audit_templates")
+}
+
+model Audit {
+  id                 String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  establishment      Establishment       @relation(fields: [establishment_id], references: [id])
+  establishment_id   String              @db.Uuid
+  audit_template     AuditTemplate       @relation(fields: [audit_template_id], references: [id])
+  audit_template_id  String              @db.Uuid
+  status             String
+  start_date         DateTime
+  end_date           DateTime?
+  final_score        Int?
+  report_pdf_url     String?
+  items              AuditItem[]
+  collaborators      AuditCollaborator[]
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  @@map("audits")
+}
+
+model AuditItem {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  audit             Audit    @relation(fields: [audit_id], references: [id])
+  audit_id          String   @db.Uuid
+  template_item_id  String
+  answer            Json?
+  score             Int?
+  comments          String?
+  attachments       Json?
+  last_updated_by   String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("audit_items")
+}
+
+model AuditCollaborator {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  audit       Audit    @relation(fields: [audit_id], references: [id])
+  audit_id    String   @db.Uuid
+  auditor_name String
+  joined_at   DateTime @default(now())
+
+  @@map("audit_collaborators")
+}
