@@ -31,7 +31,7 @@ const establishmentData = [
   { name: 'UAPS PECÉM', code: '26.841.71', type: 'UAPS' },
   { name: 'UAPS SADITE', code: '26.841.98', type: 'UAPS' },
   { name: 'UAPS SALMON', code: '26.842.10', type: 'UAPS' },
-  { name:: 'UAPS SERROTE', code: '26.842.36', type: 'UAPS' },
+  { name: 'UAPS SERROTE', code: '26.842.36', type: 'UAPS' },
   { name: 'UAPS SIUPÉ', code: '26.842.52', type: 'UAPS' },
   { name: 'UAPS TAIBA', code: '26.842.60', type: 'UAPS' },
   { name: 'UAPS VÁRZEA REDONDA', code: '26.842.87', type: 'UAPS' },
