@@ -40,10 +40,7 @@ const authOptions = {
   pages: {
     signIn: '/login', // Redirect users to a custom login page
   },
-  session: {
-    strategy: 'jwt',
-  },
-} as const;
+};
 
 const handler = NextAuth(authOptions);
 
