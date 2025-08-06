@@ -35,8 +35,7 @@ The easiest way to deploy this Next.js app is to use the [Vercel Platform](https
 3.  **Configure Environment Variables**: This is the most important step. In the Vercel project dashboard, go to "Settings" -> "Environment Variables" and add the following variables:
 
     - `DATABASE_URL`: The connection string for your PostgreSQL database from Neon.com. It should look like `postgresql://user:password@host/dbname?sslmode=require`.
-    - `AUTH_SECRET`: A long, random string used to sign session cookies. You can generate one by running `openssl rand -base64 32` in your terminal.
-    - `SHARED_PASSWORD_HASH`: The bcrypt hash of the shared password for the application. You need to generate this hash from your chosen password and add it here.
+    - `SHARED_PASSWORD`: The plaintext shared password for the application.
 
 4.  **Deploy**:
     - After configuring the environment variables, click the "Deploy" button.

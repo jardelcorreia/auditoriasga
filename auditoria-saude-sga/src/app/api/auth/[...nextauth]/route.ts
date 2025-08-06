@@ -1,7 +1,5 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { compare } from 'bcrypt';
-
 export const authOptions = {
   providers: [
     CredentialsProvider({
@@ -16,19 +14,19 @@ export const authOptions = {
         }
 
         // Check if the environment variables are set
-        const passwordHash = process.env.SHARED_PASSWORD_HASH;
-        if (!passwordHash) {
-          console.error("SHARED_PASSWORD_HASH is not set in .env file");
+        const sharedPassword = process.env.SHARED_PASSWORD;
+        if (!sharedPassword) {
+          console.error("SHARED_PASSWORD is not set in .env file");
           return null;
         }
 
-        // Compare the provided password with the stored hash
-        const isValid = await compare(credentials.password, passwordHash);
+        // Perform a direct string comparison
+        const isValid = credentials.password === sharedPassword;
 
         if (isValid) {
           // Any object returned will be saved in `user` property of the JWT
           // Since there are no real users, we return a static object
-          return { id: '1', name: 'Auditor', email: 'auditor@sga.ce.gov.br' };
+          return { id: '1' };
         } else {
           // If you return null then an error will be displayed advising the user to check their details.
           return null;
@@ -36,7 +34,9 @@ export const authOptions = {
       },
     }),
   ],
-  secret: process.env.AUTH_SECRET,
+  // The AUTH_SECRET is not strictly necessary for Vercel deployments,
+  // as it can be inferred from other environment variables.
+  // secret: process.env.AUTH_SECRET,
   pages: {
     signIn: '/login', // Redirect users to a custom login page
   },
