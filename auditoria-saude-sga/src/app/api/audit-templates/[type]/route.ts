@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 // In a real application, you would fetch this from the database
 // const template = await prisma.auditTemplate.findFirst({ where: { establishment_type: type } });
@@ -39,7 +39,7 @@ const uapsTemplate = {
 
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { type: string } }
 ) {
   const { type } = params;
