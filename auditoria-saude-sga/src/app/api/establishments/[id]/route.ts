@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
 // --- Database Connection Code (Ready to be enabled) ---
 // 1. Instantiate Prisma Client
 // const prisma = new PrismaClient();
 //
-// export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+// export async function GET(request, { params }) {
 //   try {
 //     const { id } = params;
 //     const establishment = await prisma.establishment.findUnique({
@@ -58,7 +58,7 @@ const mockEstablishments = [
     { id: '30', name: 'UAPS HARMONIA', code: '09.303.49', type: 'UAPS', createdAt: new Date(), updatedAt: new Date() },
 ];
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request, { params }) {
   const { id } = params;
   const establishment = mockEstablishments.find(e => e.id === id);
   if (establishment) {
