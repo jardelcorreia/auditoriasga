@@ -56,8 +56,8 @@ export default function AuditPage() {
     if (establishment) {
       async function fetchTemplate() {
         try {
-          const response = await fetch(`/api/audit-templates/${establishment.type}`);
-          if (!response.ok) throw new Error(`No audit template for type: ${establishment.type}`);
+          const response = await fetch(`/api/audit-templates/${establishment!.type}`);
+          if (!response.ok) throw new Error(`No audit template for type: ${establishment!.type}`);
           const data = await response.json();
           setTemplate(data);
           setError(null);
