@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from '@prisma/client'; // Keep this commented out for now
 
 // --- Database Connection Code (Ready to be enabled) ---
-// 1. Instantiate Prisma Client
 // const prisma = new PrismaClient();
 //
-// export async function GET(request: Request) {
+// export async function GET() {
 //   try {
 //     const establishments = await prisma.establishment.findMany({
 //       orderBy: { name: 'asc' },
@@ -20,7 +19,6 @@ import { PrismaClient } from '@prisma/client';
 
 
 // --- Mock Data Code (Currently active) ---
-// This is a mock data source. We'll replace this with a real database query later.
 const mockEstablishments = [
     // Hospitais e Clínicas Especializadas
     { id: '1', name: 'Hospital Geral Luiza Alcântara e Silva (HGLAS)', code: '24.271.25', type: 'Hospital', createdAt: new Date(), updatedAt: new Date() },
@@ -55,7 +53,7 @@ const mockEstablishments = [
     { id: '30', name: 'UAPS HARMONIA', code: '09.303.49', type: 'UAPS', createdAt: new Date(), updatedAt: new Date() },
 ];
 
-export async function GET(request: Request) {
+export async function GET() {
   return NextResponse.json(mockEstablishments);
 }
 // ---------------------------------------------------------

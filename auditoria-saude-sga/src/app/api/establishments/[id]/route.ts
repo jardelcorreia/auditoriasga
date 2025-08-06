@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from '@prisma/client'; // Keep this commented out for now
 
 // --- Database Connection Code (Ready to be enabled) ---
-// 1. Instantiate Prisma Client
 // const prisma = new PrismaClient();
 //
 // export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
@@ -58,8 +57,10 @@ const mockEstablishments = [
     { id: '30', name: 'UAPS HARMONIA', code: '09.303.49', type: 'UAPS', createdAt: new Date(), updatedAt: new Date() },
 ];
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = params;
+// The user is not providing a `request` object, so we don't need to type it.
+// The `params` object is now a Promise, so we need to await it.
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const establishment = mockEstablishments.find(e => e.id === id);
   if (establishment) {
     return NextResponse.json(establishment);
