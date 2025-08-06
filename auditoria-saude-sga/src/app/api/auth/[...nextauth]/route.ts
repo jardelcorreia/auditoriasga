@@ -36,7 +36,7 @@ const authOptions = {
   ],
   // The AUTH_SECRET is not strictly necessary for Vercel deployments,
   // as it can be inferred from other environment variables.
-  // secret: process.env.AUTH_SECRET,
+  secret: process.env.AUTH_SECRET,
   pages: {
     signIn: '/login', // Redirect users to a custom login page
   },
