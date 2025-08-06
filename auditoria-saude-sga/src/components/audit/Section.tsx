@@ -2,15 +2,12 @@
 
 import React from 'react';
 import Question from './Question';
+import { AuditSection, AuditAnswers } from '@/types/audit';
 
 interface SectionProps {
-  section: {
-    id: string;
-    title: string;
-    questions: any[];
-  };
-  answers: { [key: string]: any };
-  onAnswerChange: (questionId: string, value: any) => void;
+  section: AuditSection;
+  answers: AuditAnswers;
+  onAnswerChange: (questionId: string, value: AuditAnswers[string]) => void;
 }
 
 const Section: React.FC<SectionProps> = ({ section, answers, onAnswerChange }) => {

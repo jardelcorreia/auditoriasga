@@ -1,17 +1,12 @@
 "use client";
 
 import React from 'react';
+import { AuditQuestion, AuditAnswers } from '@/types/audit';
 
-// Define the structure of a Question based on our JSON template
 interface QuestionProps {
-  question: {
-    id: string;
-    text: string;
-    type: string;
-    points?: any;
-  };
-  value: any;
-  onChange: (questionId: string, value: any) => void;
+  question: AuditQuestion;
+  value: AuditAnswers[string];
+  onChange: (questionId: string, value: AuditAnswers[string]) => void;
 }
 
 const Question: React.FC<QuestionProps> = ({ question, value, onChange }) => {
@@ -26,6 +21,7 @@ const Question: React.FC<QuestionProps> = ({ question, value, onChange }) => {
             {options.map(option => (
               <button
                 key={option}
+                type="button" // Add type to prevent form submission
                 onClick={() => onChange(question.id, option)}
                 className={`px-4 py-2 rounded-md transition-colors text-sm font-medium ${
                   value === option
@@ -42,15 +38,15 @@ const Question: React.FC<QuestionProps> = ({ question, value, onChange }) => {
         return (
           <input
             type="number"
-            value={value || ''}
-            onChange={(e) => onChange(question.id, e.target.value)}
+            value={value as number || ''}
+            onChange={(e) => onChange(question.id, e.target.value === '' ? null : Number(e.target.value))}
             className="mt-1 block w-full md:w-1/3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         );
       case 'text':
         return (
           <textarea
-            value={value || ''}
+            value={value as string || ''}
             onChange={(e) => onChange(question.id, e.target.value)}
             rows={3}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"

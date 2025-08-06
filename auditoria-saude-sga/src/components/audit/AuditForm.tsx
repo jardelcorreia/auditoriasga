@@ -2,19 +2,16 @@
 
 import React, { useState } from 'react';
 import Section from './Section';
+import { AuditTemplate, AuditAnswers } from '@/types/audit';
 
 interface AuditFormProps {
-  template: {
-    name: string;
-    version: string;
-    sections: any[];
-  };
+  template: AuditTemplate;
 }
 
 const AuditForm: React.FC<AuditFormProps> = ({ template }) => {
-  const [answers, setAnswers] = useState<{ [key: string]: any }>({});
+  const [answers, setAnswers] = useState<AuditAnswers>({});
 
-  const handleAnswerChange = (questionId: string, value: any) => {
+  const handleAnswerChange = (questionId: string, value: AuditAnswers[string]) => {
     setAnswers(prevAnswers => ({
       ...prevAnswers,
       [questionId]: value,

@@ -5,20 +5,15 @@ import { useParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import AuditForm from '@/components/audit/AuditForm'; // Import the new component
+import AuditForm from '@/components/audit/AuditForm';
+import { AuditTemplate } from '@/types/audit'; // Import the main template type
 
-// Define the types
+// Define the type for an establishment
 type Establishment = {
   id: string;
   name: string;
   code: string;
   type: 'Hospital' | 'Specialized' | 'Support' | 'UAPS';
-};
-
-type AuditTemplate = {
-  name: string;
-  version: string;
-  sections: any[];
 };
 
 export default function AuditPage() {

@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 // import { PrismaClient } from '@prisma/client'; // Keep this commented out for now
 
 // --- Database Connection Code (Ready to be enabled) ---
