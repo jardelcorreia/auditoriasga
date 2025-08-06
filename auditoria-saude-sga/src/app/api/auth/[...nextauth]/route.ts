@@ -43,7 +43,7 @@ const authOptions = {
   session: {
     strategy: 'jwt',
   },
-};
+} as const;
 
 const handler = NextAuth(authOptions);
 
